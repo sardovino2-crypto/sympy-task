@@ -75,7 +75,25 @@ def calcola_polinomio_taylor(espressione: str, variabile: str, punto: float, ord
 
 def risolvi_sistema_lineare(eq1: str, eq2: str, var1: str, var2: str) -> Dict[sympy.Symbol, sympy.Expr]:
     """Sub-task 5: Risolvere un Sistema Lineare."""
-    pass
+
+    try:
+        # Definizione variabili simboliche
+        x = sympy.symbols(var1)
+        y = sympy.symbols(var2)
+
+        # Parsing delle equazioni (uguali a 0 implicitamente)
+        eq1_expr = sympy.sympify(eq1)
+        eq2_expr = sympy.sympify(eq2)
+
+        # Risoluzione sistema
+        soluzione = sympy.solve((eq1_expr, eq2_expr), (x, y))
+
+        return soluzione
+
+    except Exception as e:
+        raise ValueError(f"Errore nella risoluzione del sistema: {e}")
+
+
 
 def main():
     print("Sub-task 1:", calcola_derivata("x**3 + 2*x", "x"))
