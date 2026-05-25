@@ -2,7 +2,7 @@ import sympy
 from typing import Dict
 # Controlla il file readme.md per i dettagli su ciascun sub-task
 
-def calcola_derivata(espressione: str, variabile: str):
+def calcola_derivata(espressione: str, variabile: str)-> sympy.Expr:
     try:
         # Crea il simbolo della variabile
         var = sympy.symbols(variabile)
@@ -20,9 +20,22 @@ def calcola_derivata(espressione: str, variabile: str):
         raise ValueError(f"Errore nel parsing o nel calcolo: {e}")
 
 
-def calcola_integrale_definito(espressione: str, variabile: str, estremo_inf: float, estremo_sup: float) -> sympy.Expr:
+def calcola_integrale_definito(espressione: str, variabile: str, estremo_inf: float, estremo_sup: float)-> sympy.Expr :
     """Sub-task 2: Calcolare un Integrale Definito."""
-    pass
+
+    try:
+        var = sympy.symbols(variabile)
+        expr =sympy.sympify(espressione)
+
+        # integrale definito
+        risultato = sympy.integrate(expr, (var, estremo_inf, estremo_sup))
+
+        return risultato
+
+    except Exception as e:
+        raise ValueError(f"Errore nel calcolo dell'integrale: {e}")
+
+
 
 def calcola_limite(espressione: str, variabile: str, punto: str) -> sympy.Expr:
     """Sub-task 3: Calcolare un Limite."""
