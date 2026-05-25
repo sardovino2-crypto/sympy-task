@@ -1,11 +1,24 @@
 import sympy
 from typing import Dict
-
 # Controlla il file readme.md per i dettagli su ciascun sub-task
 
-def calcola_derivata(espressione: str, variabile: str) -> sympy.Expr:
-    """Sub-task 1: Calcolare una Derivata."""
-    pass
+def calcola_derivata(espressione: str, variabile: str):
+    try:
+        # Crea il simbolo della variabile
+        var = sympy.symbols(variabile)
+
+        # Parsing dell'espressione in forma simbolica
+        expr = sympy.sympify(espressione)
+
+        # Calcolo della derivata
+        derivata = sympy.diff(expr, var)
+
+        # Restituisce il risultato come stringa
+        return str(derivata)
+
+    except Exception as e:
+        raise ValueError(f"Errore nel parsing o nel calcolo: {e}")
+
 
 def calcola_integrale_definito(espressione: str, variabile: str, estremo_inf: float, estremo_sup: float) -> sympy.Expr:
     """Sub-task 2: Calcolare un Integrale Definito."""
