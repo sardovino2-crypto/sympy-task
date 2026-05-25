@@ -39,11 +39,39 @@ def calcola_integrale_definito(espressione: str, variabile: str, estremo_inf: fl
 
 def calcola_limite(espressione: str, variabile: str, punto: str) -> sympy.Expr:
     """Sub-task 3: Calcolare un Limite."""
-    pass
+
+    try:
+        var = sympy.symbols(variabile)
+        expr = sympy.sympify(espressione)
+        pt = sympy.sympify(punto)  # supporta anche infinito ("oo")
+
+        risultato = sympy.limit(expr, var, pt)
+
+        return risultato
+
+    except Exception as e:
+        raise ValueError(f"Errore nel calcolo del limite: {e}")
+
 
 def calcola_polinomio_taylor(espressione: str, variabile: str, punto: float, ordine: int) -> sympy.Expr:
     """Sub-task 4: Calcolare una Serie di Taylor."""
-    pass
+
+    try:
+        var = sympy.symbols(variabile)
+        expr = sympy.sympify(espressione)
+
+        # Calcolo della serie di Taylor
+        taylor = sympy.series(expr, var, punto, ordine )
+
+        # Rimuove il termine O(...)
+        polinomio =taylor.removeO()
+
+        return polinomio
+
+    except Exception as e:
+        raise ValueError(f"Errore nel calcolo del polinomio di Taylor: {e}")
+
+
 
 def risolvi_sistema_lineare(eq1: str, eq2: str, var1: str, var2: str) -> Dict[sympy.Symbol, sympy.Expr]:
     """Sub-task 5: Risolvere un Sistema Lineare."""
